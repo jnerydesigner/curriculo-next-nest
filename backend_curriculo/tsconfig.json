@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es2017",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "baseUrl": ".",
+    "paths": {
+      "@controllers/*": ["src/presentation/controllers/*"],
+      "@services/*": ["src/application/services/*"],
+      "@entities/*": ["src/domain/entities/*"],
+      "@repositories/*": ["src/infra/repositories/*"],
+      "@dtos/*": ["src/application/dtos/*"],
+      "@mappers/*": ["src/infra/database/mappers/*"],
+      "@auth/*": ["src/infra/auth/*"],
+      "@helpers/*": ["src/infra/helpers/*"],
+      "@providers/*": ["src/infra/providers/*"]
+    }
+  }
+}
