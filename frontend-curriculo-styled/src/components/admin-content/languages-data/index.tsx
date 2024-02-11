@@ -3,7 +3,6 @@ import axios from 'axios'
 import { z } from 'zod'
 import Input from '../input'
 import { Button } from '../button'
-import { useEffect, useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FaStar, FaRegStar, FaEdit } from 'react-icons/fa'
 import { MdOutlineDeleteOutline } from 'react-icons/md'
@@ -17,7 +16,7 @@ import {
   TableRow
 } from 'src/components/@/components/ui/table'
 import { useCurriculo } from '@contexts/curriculo.context'
-import { api } from 'src/helpers/api'
+import { api } from '@helpers/api'
 
 const createLanguagesSchema = z.object({
   name: z.string(),
@@ -53,11 +52,9 @@ export default function LanguagesData() {
     }
 
     try {
-      await api.post('http://localhost:3001/v1/curriculo/languages', dataFull)
+      await api.post('/curriculo/languages', dataFull)
 
-      const responseCurriculo = await api.get(
-        '/users/6e31accd-1054-4cd4-ab34-f8d56da8e172'
-      )
+      const responseCurriculo = await api.get(`/users/${userId}`)
 
       setCurriculoUser(responseCurriculo.data)
       languages.value = ''
@@ -81,9 +78,11 @@ export default function LanguagesData() {
     return starsArray
   }
 
-  async function deleteLanguage(id: string) {
+  async function deleteLanguage(languageId: string) {
     try {
-      await api.delete(`http://localhost:3001/v1/curriculo/languages/${id}`)
+      await api.delete(
+        `http://localhost:3001/v1/curriculo/languages/${languageId}`
+      )
       const responseCurriculo = await api.get(
         '/users/6e31accd-1054-4cd4-ab34-f8d56da8e172'
       )

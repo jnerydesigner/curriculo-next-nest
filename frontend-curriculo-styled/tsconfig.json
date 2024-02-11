@@ -20,7 +20,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@contexts/*": ["src/contexts/*"]
+      "@contexts/*": ["src/contexts/*"],
+      "@helpers/*": ["src/helpers/*"],
+      "@ui-components/*": ["src/components/@/*"],
     }
   },
   "include": [
