@@ -19,7 +19,8 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "prisma:generate": "prisma generate --schema=./src/infra/database/postgres/prisma/schema.prisma",
-    "prisma:migrate": "prisma migrate dev --schema=./src/infra/database/postgres/prisma/schema.prisma"
+    "prisma:migrate": "prisma migrate dev --schema=./src/infra/database/postgres/prisma/schema.prisma",
+    "prisma:generate:prod": "prisma generate --schema=./app/data_access/prisma/schema.prisma"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.501.0",

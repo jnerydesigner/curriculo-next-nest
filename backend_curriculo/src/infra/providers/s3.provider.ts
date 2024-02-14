@@ -31,7 +31,7 @@ export class S3ConfigProvider {
   }
 
   createBucket() {
-    this.getS3().createBucket({ Bucket: 'curriculo-bucket' }, (err, data) => {
+    this.getS3().createBucket({ Bucket: this.getBucketName() }, (err, data) => {
       this.logger.log(`Bucket criado com sucesso: ${data}`);
     });
   }
