@@ -1,9 +1,9 @@
+import { GenerateSlug } from '@helpers/generate-slug';
 import { IdVerifyType } from './../dtos/id-verify.dto';
 import { SocialMediaType } from '@dtos/social-media.dto';
 import { SocialMediasMapper } from '@mappers/social-medias.mapper';
 import { Inject, Injectable } from '@nestjs/common';
 import { ISocialMediasRepository } from '@repositories/interfaces/social-medias-repository.interface';
-import { GenerateSlug } from 'src/infra/helpers/generate-slug';
 
 @Injectable()
 export class SocialMediasService {

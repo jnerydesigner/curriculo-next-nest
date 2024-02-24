@@ -1,3 +1,5 @@
+"use client";
+
 import SubTitle from "../components/subtitle";
 
 import Formation from "../components/formation";
@@ -6,6 +8,8 @@ import LanguageClient from "../components/language-client";
 import Bio from "../components/bio";
 import HeaderData from "../components/header-data";
 import Habilities from "../components/habilities";
+
+import { useCurriculoStore } from "@/store/use-curriculo-store";
 
 export default function Curriculo() {
   return (

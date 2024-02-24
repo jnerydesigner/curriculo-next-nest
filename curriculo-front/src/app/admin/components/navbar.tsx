@@ -11,6 +11,8 @@ const Navbar: React.FC = async () => {
         <LinkMenu title="Formação Academica" link="/admin/educations" />
         <LinkMenu title="Experiência Profissional" link="/admin/experiences" />
         <LinkMenu title="Idiomas" link="/admin/languages" />
+        <LinkMenu title="Idiomas2" link="/admin/languages2" />
+        <LinkMenu title="Products" link="/admin/products" />
         <LinkMenu title="Curriculo" link="/curriculo" />
       </ul>
     </div>

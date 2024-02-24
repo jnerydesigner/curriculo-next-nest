@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from './presentation/controllers/app.controller';
+import { AppService } from './application/services/app.service';
 import { CurriculoModule } from './infra/modules/curriculo.module';
 import { AuthModule } from './infra/modules/auth.module';
 import { UploadImageModule } from './infra/modules/upload-image.module';

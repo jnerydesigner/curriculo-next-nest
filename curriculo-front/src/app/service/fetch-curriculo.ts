@@ -3,7 +3,7 @@ export async function fetchCurriculo() {
     "http://localhost:3000/v1/curriculo/users/6e31accd-1054-4cd4-ab34-f8d56da8e172",
     {
       next: {
-        revalidate: 10,
+        tags: ["curriculo"],
       },
     }
   );

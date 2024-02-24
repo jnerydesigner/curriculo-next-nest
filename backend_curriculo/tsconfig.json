@@ -26,7 +26,8 @@
       "@mappers/*": ["src/infra/database/mappers/*"],
       "@auth/*": ["src/infra/auth/*"],
       "@helpers/*": ["src/infra/helpers/*"],
-      "@providers/*": ["src/infra/providers/*"]
+      "@providers/*": ["src/infra/providers/*"],
+      "@modules/*": ["src/infra/modules/*"]
     }
   }
 }

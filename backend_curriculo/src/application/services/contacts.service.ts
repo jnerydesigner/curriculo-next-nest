@@ -3,9 +3,10 @@ import { UpdateContactType } from '@dtos/update-contacts.dto';
 import { ContactsMapper } from '@mappers/contacts.mapper';
 import { Inject, Injectable } from '@nestjs/common';
 import { IContactsRepository } from '@repositories/interfaces/contacts-repository.interface';
+import { ContactsServiceInterface } from './interfaces/contacts-service.interface';
 
 @Injectable()
-export class ContactsService {
+export class ContactsService implements ContactsServiceInterface {
   constructor(
     @Inject('CONTACTS_REPOSITORY')
     private readonly contactsRepository: IContactsRepository,

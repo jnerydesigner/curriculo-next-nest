@@ -10,8 +10,11 @@ import {
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 const TableLanguages: React.FC = async () => {
-  const response = await fetch("http://localhost:3000/v1/curriculo/languages");
-
+  const response = await fetch("http://localhost:3000/v1/curriculo/languages", {
+    next: {
+      tags: ["curriculo"],
+    },
+  });
   const data: LanguageType[] = await response.json();
 
   function renderStars(stars: number) {
@@ -33,31 +36,33 @@ const TableLanguages: React.FC = async () => {
   }
 
   return (
-    <Table>
-      <TableCaption>Lista de Idiomas</TableCaption>
-      <TableHeader className="bg-curriculo-primary  border-white border-b-4">
-        <TableRow>
-          <TableHead className="w-[50%] text-center text-curriculo-text font-bold text-lg">
-            Idioma
-          </TableHead>
-          <TableHead className="text-center text-curriculo-text font-bold text-lg">
-            Estrelas
-          </TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((item) => (
-          <TableRow key={item.id}>
-            <TableCell className="font-medium text-center text-white">
-              {item.name}
-            </TableCell>
-            <TableCell className="text-center">
-              {renderStars(item.stars)}
-            </TableCell>
+    <div className="w-full flex flex-1 justify-center items-start p-2">
+      <Table>
+        <TableCaption>Lista de Idiomas</TableCaption>
+        <TableHeader className="bg-curriculo-primary  border-white border-b-4">
+          <TableRow>
+            <TableHead className="w-[50%] text-center text-curriculo-text font-bold text-lg">
+              Idioma
+            </TableHead>
+            <TableHead className="text-center text-curriculo-text font-bold text-lg">
+              Estrelas
+            </TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {data.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell className="font-medium text-center text-white">
+                {item.name}
+              </TableCell>
+              <TableCell className="text-center">
+                {renderStars(item.stars)}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

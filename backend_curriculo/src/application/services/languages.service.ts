@@ -1,8 +1,8 @@
 import { LanguagesIdType, LanguagesType } from '@dtos/languages.dto';
+import { GenerateSlug } from '@helpers/generate-slug';
 import { LanguagesMapper } from '@mappers/languages.mapper';
 import { Inject, Injectable } from '@nestjs/common';
 import { ILanguagesRepository } from '@repositories/interfaces/languages-repository.interface';
-import { GenerateSlug } from 'src/infra/helpers/generate-slug';
 
 @Injectable()
 export class LanguagesService {

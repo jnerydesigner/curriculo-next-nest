@@ -9,10 +9,7 @@ import Navbar from "./components/navbar";
 export default function Admin() {
   return (
     <>
-      <Header />
-      <Navbar />
-      <Main />
-      <Footer />
+      <h1>Page Admin</h1>
     </>
   );
 }
