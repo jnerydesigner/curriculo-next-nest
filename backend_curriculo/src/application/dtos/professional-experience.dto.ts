@@ -7,13 +7,13 @@ export const CreateProfessionalExperienceDescriptionDTO = z.object({
 });
 
 export const CreateProfessionalExperienceDTO = z.object({
+  userId: z.string().min(3).max(255),
   title: z.string().min(3).max(255),
   company: z.string().min(3).max(255),
+  description: z.array(CreateProfessionalExperienceDescriptionDTO).optional(),
   dateInit: z.coerce.date(),
   dateEnd: z.coerce.date().optional(),
   isActualJob: z.boolean(),
-  userId: z.string().min(3).max(255),
-  description: z.array(CreateProfessionalExperienceDescriptionDTO),
 });
 
 export const UpdateProfessionalExperienceDescriptionDTO = z.object({
@@ -24,14 +24,14 @@ export const UpdateProfessionalExperienceDescriptionDTO = z.object({
 });
 
 export const UpdateProfessionalExperienceDTO = z.object({
-  id: z.string().min(3).max(255),
+  id: z.string().min(3).max(255).optional(),
   title: z.string().min(3).max(255).optional(),
   company: z.string().min(3).max(255).optional(),
   dateInit: z.coerce.date(),
   dateEnd: z.coerce.date().optional(),
   isActualJob: z.boolean(),
   userId: z.string().min(3).max(255),
-  description: z.array(UpdateProfessionalExperienceDescriptionDTO),
+  descriptions: z.array(UpdateProfessionalExperienceDescriptionDTO),
 });
 
 export type ProfessionalExperienceType = z.infer<

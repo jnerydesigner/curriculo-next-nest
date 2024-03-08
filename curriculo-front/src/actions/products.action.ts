@@ -7,7 +7,7 @@ import {
 import { ProductsType } from "@/app/admin/components/table-products";
 import axios from "axios";
 
-const userId = "6e31accd-1054-4cd4-ab34-f8d56da8e172";
+const userId = "947aa786-6a48-4994-bd3c-daf4fdeb931c";
 
 export async function addToDatabaseAction(dataAction: ProductsTypeFetch) {
   if (!dataAction) return;
@@ -30,7 +30,7 @@ export async function addToDatabaseAction(dataAction: ProductsTypeFetch) {
       }
     );
 
-    console.log(response);
+
 
     return {
       success: true,

@@ -16,7 +16,5 @@ export function Progress({ value }: ProgressProps) {
     return () => clearTimeout(timer);
   }, [value]);
 
-  return (
-    <ProgressChad value={progress} className="w-[60%] mb-1 bg-slate-200" />
-  );
+  return <ProgressChad value={value} className="w-[60%] mb-1 bg-slate-200" />;
 }

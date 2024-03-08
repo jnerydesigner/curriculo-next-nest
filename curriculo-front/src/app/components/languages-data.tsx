@@ -13,7 +13,7 @@ const LanguagesData: React.FC<LanguagesDataProps> = ({ name, stars }) => {
       starsArray.push(<FaStar key={i} className="fill-amber-500" />);
     }
 
-    for (let i = 0; i < 5 - stars; i++) {
+    for (let i = stars; i < 5; i++) {
       starsArray.push(<FaRegStar key={i} className="fill-amber-500" />);
     }
 

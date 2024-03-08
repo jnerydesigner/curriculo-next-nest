@@ -7,7 +7,6 @@ export default function Main() {
   const pathname = usePathname();
 
   function renderPage() {
-    console.log(pathname);
     if (pathname === "/admin/personal-data") {
       return (
         <div className="flex justify-center items-center col-span-9 row-span-10 bg-lime-400">

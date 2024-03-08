@@ -17,7 +17,9 @@ export class ProfessionalExperienceService {
   }
 
   async create(request: ProfessionalExperienceType) {
-    return this.professionalExperiencesRepository.create(request);
+    return ProfessionalExperiencesMapper.toResponseTrue(
+      await this.professionalExperiencesRepository.create(request),
+    );
   }
 
   async update(id: string, request: ProfessionalExperienceType) {
@@ -28,5 +30,17 @@ export class ProfessionalExperienceService {
     return ProfessionalExperiencesMapper.toResponseDescription(
       await this.professionalExperiencesRepository.createDescription(request),
     );
+  }
+
+  async findOneExperience(id: string): Promise<ProfessionalExperienceType[]> {
+    const response = await this.professionalExperiencesRepository.findByUserId(
+      id,
+    );
+
+    const professional = response.map((item) => {
+      return ProfessionalExperiencesMapper.toResponseNew(item);
+    });
+
+    return professional;
   }
 }

@@ -27,7 +27,6 @@ const FormLanguages = () => {
   });
 
   const onSubmit = async (data: z.infer<typeof LanguageSchema>) => {
-    console.log(data);
     startTransition(() => {
       languageAction(data);
     });

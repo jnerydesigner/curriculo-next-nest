@@ -29,6 +29,11 @@ export class LanguagesController {
     return this.languagesService.create(languageParse);
   }
 
+  @Get(':idUser')
+  findOne(@Param('idLanguage') idLanguage: string) {
+    return this.languagesService.findOne(idLanguage);
+  }
+
   @Patch(':idLanguage')
   updateLanguage(
     @Body() language: LanguagesIdType,

@@ -31,7 +31,7 @@ export default function FormProducts() {
     };
 
     const response = await addToDatabaseAction(newProduct);
-    console.log(response);
+
     await renderFetchLanguage(response?.success);
 
     reset();

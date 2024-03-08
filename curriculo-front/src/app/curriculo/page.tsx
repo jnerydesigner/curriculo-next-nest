@@ -1,5 +1,7 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
+
 import SubTitle from "../components/subtitle";
 
 import Formation from "../components/formation";
@@ -9,9 +11,12 @@ import Bio from "../components/bio";
 import HeaderData from "../components/header-data";
 import Habilities from "../components/habilities";
 
-import { useCurriculoStore } from "@/store/use-curriculo-store";
-
 export default function Curriculo() {
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+
+  console.log(userId);
+
   return (
     <main className="flex min-h-screen flex-col items-center bg-curriculo-bgblack">
       <div className="h-auto w-7/12 bg-slate-200 grid grid-cols-8 mt-2">
@@ -25,11 +30,11 @@ export default function Curriculo() {
           </div>
           <div className="w-[100%] flex flex-col justify-center items-center ">
             <SubTitle title="IDIOMAS" />
-            <LanguageClient />
+            <LanguageClient userId={userId !== null ? userId : ""} />
           </div>
           <div className="w-[100%] flex flex-col justify-center items-center ">
             <SubTitle title="REDES SOCIAIS" />
-            <LanguageClient />
+            <LanguageClient userId={userId !== null ? userId : ""} />
           </div>
         </div>
         <div className="bg-curriculo-foreground col-start-4 col-end-9">

@@ -10,4 +10,5 @@ export interface ILanguagesRepository {
   ): Promise<LanguagesEntity>;
 
   delete(id: string): Promise<void>;
+  findOne(id: string): Promise<LanguagesEntity[]>;
 }

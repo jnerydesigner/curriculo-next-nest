@@ -10,8 +10,8 @@ const HeaderData: React.FC = async () => {
     <>
       <div className="w-[300px] h-[280px] p-2">
         <Image
-          src={data.personalData[0].avatarUrl}
-          alt={data.personalData[0].fullname}
+          src={data.personalData?.[0].avatarUrl}
+          alt={data.personalData?.[0].fullname}
           width={400}
           height={400}
           className="rounded-[50%] w-[100%] h-[100%] border-4 border-curriculo-foreground shadow-md ml-12"
@@ -22,20 +22,22 @@ const HeaderData: React.FC = async () => {
           {data.name}
         </h2>
         <TitleDetails title={data.email} type="mail" />
-        <TitleDetails title={data.contacts[0].phone} type="whatsapp" />
+        <TitleDetails title={data.contacts?.[0].phone} type="whatsapp" />
         <TitleDetails
           title={createAddress(
-            data.address[0].street,
-            data.address[0].number,
-            data.address[0].district
+            data.address?.[0].street,
+            data.address?.[0].number,
+            data.address?.[0].district
           )}
           type="address"
         />
         <TitleDetails
           title={
-            data.contacts[0].socialMedias.find(
+            data?.contacts?.[0].socialMedias?.find(
               (social: any) => social.name === "LinkedIn"
-            ).url
+            )?.url === null
+              ? ""
+              : "" // Add null check here
           }
           type="linkedin"
         />

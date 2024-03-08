@@ -6,7 +6,7 @@ const Experience: React.FC = async () => {
   const data = await fetchCurriculo();
   return (
     <>
-      {data.professionalExperiences.map((experience: any) => (
+      {data.professionalExperiences?.map((experience: any) => (
         <div
           key={experience.id}
           className="w-[100%] flex flex-col justify-center items-center"

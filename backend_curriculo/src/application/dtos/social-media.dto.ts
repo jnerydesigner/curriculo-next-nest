@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const CreateSocialMediaDTO = z.object({
   name: z.string().min(3).max(255),
-  slug: z.string().min(3).max(255),
+  slug: z.string().min(3).max(255).optional(),
   contactId: z.string().min(3).max(255),
   url: z.string().min(3).max(255),
 });

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { IProfessionalExperiencesRepository } from './interfaces/professional-experiences-repository.interface';
 import { ProfessionalExperienceEntity } from '@entities/professional-experiencies.entity';
 import { PrismaService } from '../database/postgres/prisma/client/prisma.service';
@@ -9,12 +9,16 @@ import {
   ProfessionalExperienceType,
 } from '@dtos/professional-experience.dto';
 import { ProfessionalExperienceDescriptionEntity } from '@entities/professiona-experiences-description.entity';
+import { ProfessionalExperiences, Prisma } from '@prisma/client';
 
 @Injectable()
 export class ProfessionalExperienceRepository
   implements IProfessionalExperiencesRepository
 {
-  constructor(private readonly prisma: PrismaService) {}
+  private logger: Logger;
+  constructor(private readonly prisma: PrismaService) {
+    this.logger = new Logger(ProfessionalExperienceRepository.name);
+  }
 
   async findAll(): Promise<ProfessionalExperienceDescriptionWithIdType[]> {
     const professionalExperience =
@@ -31,22 +35,8 @@ export class ProfessionalExperienceRepository
   async create(
     professionalExperience: ProfessionalExperienceType,
   ): Promise<any> {
-    const professionalExperienceDescription =
-      await this.prisma.professionalExperiencesDescription.findFirst({
-        where: {
-          user_id: professionalExperience.userId,
-        },
-      });
-
-    if (!professionalExperienceDescription) {
-      throw new Error('Professional Experience Description not found');
-    }
-
     const professionalExperienceCreated =
       await this.prisma.professionalExperiences.create({
-        include: {
-          ProfessionalExperiencesDescription: true,
-        },
         data: {
           title: professionalExperience.title,
           company: professionalExperience.company,
@@ -106,8 +96,36 @@ export class ProfessionalExperienceRepository
   findById(id: string): Promise<ProfessionalExperienceEntity> {
     throw new Error('Method not implemented.');
   }
-  findByUserId(userId: string): Promise<ProfessionalExperienceEntity[]> {
-    throw new Error('Method not implemented.');
+  async findByUserId(userId: string): Promise<
+    | Prisma.ProfessionalExperiencesGetPayload<{
+        include: {
+          ProfessionalExperiencesDescription: true;
+        };
+      }>[]
+    | []
+  > {
+    const professionalUserExperience =
+      await this.prisma.professionalExperiences.findMany({
+        where: {
+          user_id: userId,
+        },
+        include: {
+          ProfessionalExperiencesDescription: true,
+        },
+      });
+
+    professionalUserExperience.forEach((experience) => {
+      if (experience.ProfessionalExperiencesDescription === null) {
+        return [];
+      }
+
+      return {
+        ...experience,
+        description: experience.ProfessionalExperiencesDescription,
+      };
+    });
+
+    return professionalUserExperience;
   }
 
   delete(id: string): Promise<void> {
@@ -125,6 +143,8 @@ export class ProfessionalExperienceRepository
           user_id: description.userId,
         },
       });
+
+    console.log(createDescription);
 
     return ProfessionalExperiencesMapper.toDomainDescription(createDescription);
   }

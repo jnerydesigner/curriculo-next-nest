@@ -8,8 +8,8 @@ export class ProfessionalExperienceDescriptionEntity {
 
   constructor(
     description: string,
-    userId?: string,
     id?: string,
+    userId?: string,
     professionalExperiencesId?: string,
   ) {
     this._id = id !== null ? id : randomUUID();

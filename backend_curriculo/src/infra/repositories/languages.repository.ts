@@ -73,4 +73,18 @@ export class LanguagesRepository implements ILanguagesRepository {
       },
     });
   }
+
+  async findOne(id: string): Promise<LanguagesEntity[]> {
+    const languages = await this.prisma.languages.findMany({
+      where: {
+        user_id: id,
+      },
+    });
+
+    if (!languages) {
+      throw new Error('Language not found');
+    }
+
+    return languages.map((language) => LanguagesMapper.toDomain(language));
+  }
 }

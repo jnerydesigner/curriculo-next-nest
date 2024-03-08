@@ -6,7 +6,7 @@ const Formation: React.FC = async () => {
 
   return (
     <>
-      {data.academicEducations.map((formation: any) => (
+      {data.academicEducations?.map((formation: any) => (
         <div
           key={formation.id}
           className="flex flex-col justify-center items-center"

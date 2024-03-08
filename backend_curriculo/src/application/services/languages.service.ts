@@ -52,4 +52,12 @@ export class LanguagesService {
   delete(id: string) {
     return this.languagesRepository.delete(id);
   }
+
+  async findOne(userId: string) {
+    const languagesEntities = await this.languagesRepository.findOne(userId);
+
+    return languagesEntities.flatMap((language) => {
+      return LanguagesMapper.toResponse(language);
+    });
+  }
 }

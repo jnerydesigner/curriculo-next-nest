@@ -5,6 +5,7 @@ import { PrismaService } from '../database/postgres/prisma/client/prisma.service
 import { SocialMediasEntity } from '@entities/social-medias.entity';
 import { SocialMediasMapper } from '@mappers/social-medias.mapper';
 import { SocialMediaType } from '@dtos/social-media.dto';
+import { GenerateSlug } from '@helpers/generate-slug';
 
 @Injectable()
 export class SocialMediasRepository implements ISocialMediasRepository {
@@ -33,7 +34,7 @@ export class SocialMediasRepository implements ISocialMediasRepository {
     const socialMediaCReated = await this.prisma.socialMedias.create({
       data: {
         name: socialMedia.name,
-        slug: socialMedia.slug,
+        slug: GenerateSlug.execute(socialMedia.name),
         url: socialMedia.url,
         contacts_id: socialMedia.contactId,
       },
@@ -58,7 +59,7 @@ export class SocialMediasRepository implements ISocialMediasRepository {
       where: { id: id },
       data: {
         name: socialMedia.name,
-        slug: socialMedia.slug,
+        slug: GenerateSlug.execute(socialMedia.name),
         url: socialMedia.url,
       },
     });

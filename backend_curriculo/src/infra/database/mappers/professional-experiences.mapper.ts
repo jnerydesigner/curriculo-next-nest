@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { ProfessionalExperienceDescriptionEntity } from '@entities/professiona-experiences-description.entity';
 import { ProfessionalExperienceEntity } from '@entities/professional-experiencies.entity';
 import {
@@ -17,8 +18,11 @@ type ProfessionalExperienceWithRelations =
     };
   }>;
 
+type ProfessionalExperienceNotRelations =
+  Prisma.ProfessionalExperiencesGetPayload<{}>;
+
 export class ProfessionalExperiencesMapper {
-  static toDomain(
+  static toDomainWithRelations(
     raw: ProfessionalExperienceWithRelations,
   ): ProfessionalExperienceEntity {
     const professionalExperienceDescriptions =
@@ -45,6 +49,22 @@ export class ProfessionalExperiencesMapper {
     return professionalExperience;
   }
 
+  static toDomain(
+    raw: ProfessionalExperienceNotRelations,
+  ): ProfessionalExperienceEntity {
+    const professionalExperience = new ProfessionalExperienceEntity(
+      raw.title,
+      raw.company,
+      new Date(raw.date_init),
+      new Date(raw.date_end),
+      raw.is_actual_job,
+      raw.user_id,
+      raw.id,
+    );
+
+    return professionalExperience;
+  }
+
   static toPersistence(professionalExperience: ProfessionalExperienceEntity) {
     return {
       id: professionalExperience.id,
@@ -60,17 +80,19 @@ export class ProfessionalExperiencesMapper {
   static toDomainDescription(
     raw: ProfessionalExperiencesDescription,
   ): ProfessionalExperienceDescriptionEntity {
-    return new ProfessionalExperienceDescriptionEntity(
-      raw.id,
+    const entity = new ProfessionalExperienceDescriptionEntity(
       raw.description,
+      raw.id,
       raw.professional_experiences_id,
       raw.user_id,
     );
+    return entity;
   }
 
   static toResponseDescription(
     raw: ProfessionalExperienceDescriptionEntity,
   ): ProfessionalExperienceDescriptionUpdateType {
+    console.log('raw', raw);
     return {
       id: raw.id,
       description: raw.description,
@@ -90,14 +112,76 @@ export class ProfessionalExperiencesMapper {
       dateEnd: raw.date_end,
       isActualJob: raw.is_actual_job,
       userId: raw.user_id,
-      description: raw.ProfessionalExperiencesDescription.map((description) => {
+      descriptions: raw.ProfessionalExperiencesDescription.map(
+        (description) => {
+          return {
+            id: description.id,
+            description: description.description,
+            userId: description.user_id,
+            professionalExperiencesId: description.professional_experiences_id,
+          };
+        },
+      ),
+    };
+  }
+
+  static toResponseNew(raw: any): ProfessionalExperienceTypeMapper {
+    return {
+      id: raw.id,
+      title: raw.title,
+      company: raw.company,
+      dateInit: raw.date_init,
+      dateEnd: raw.date_end,
+      isActualJob: raw.is_actual_job,
+      userId: raw.user_id,
+      descriptions: raw.ProfessionalExperiencesDescription.map(
+        (description) => {
+          return {
+            id: description.id,
+            description: description.description,
+            professionalExperiencesId: description.professional_experiences_id,
+          };
+        },
+      ),
+    };
+  }
+
+  static toResponseTrue(
+    raw: ProfessionalExperienceEntity,
+  ): ProfessionalExperienceDescriptionWithIdType {
+    return {
+      id: raw.id,
+      title: raw.title,
+      company: raw.company,
+      dateInit: raw.dateInit,
+      dateEnd: raw.dateEnd,
+      isActualJob: raw.isActualJob,
+      userId: raw.userId,
+      descriptions: raw.descriptions.map((description) => {
         return {
           id: description.id,
           description: description.description,
-          userId: description.user_id,
-          professionalExperiencesId: description.professional_experiences_id,
+          userId: description.userId,
+          professionalExperiencesId: description.professionalExperiencesId,
         };
       }),
     };
   }
+}
+
+interface DescriptionType {
+  id: string;
+  description: string;
+  professionalExperiencesId: string;
+}
+
+export interface ProfessionalExperienceTypeMapper {
+  id: string;
+  title: string;
+  company: string;
+  dateInit: Date;
+  dateEnd: Date;
+  isActualJob: boolean;
+  userId: string;
+  descriptions: DescriptionType[];
 }

@@ -4,9 +4,9 @@ export const CreatePersonalDataDTO = z.object({
   fullname: z.string().min(3).max(255),
   document: z.string().min(3).max(255),
   birthday: z.coerce.date(),
-  avatarUrl: z.string().min(3).max(255),
+  avatarUrl: z.string().min(3).max(255).optional(),
   userId: z.string().min(3).max(255),
-  profession: z.string().min(3).max(255),
+  profession: z.string().min(3).max(255).optional(),
 });
 
 export const UpdatePersonalDataDTO = z.object({

@@ -38,6 +38,11 @@ export class ProfessionalExperienceController {
     );
   }
 
+  @Get(':id')
+  findOneExperience(@Param('id') id: IdVerifyType) {
+    return this.professionalExperienceService.findOneExperience(id);
+  }
+
   @Patch(':id')
   update(
     @Body() body: ProfessionalExperienceType,

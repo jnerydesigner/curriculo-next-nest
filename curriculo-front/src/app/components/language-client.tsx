@@ -1,13 +1,18 @@
 /* eslint-disable @next/next/no-async-client-component */
-import { fetchCurriculo } from "../service/fetch-curriculo";
+import { fetchLanguage } from "../service/fetch-language";
 import LanguagesData from "./languages-data";
 
-const LanguageClient = async () => {
-  const data = await fetchCurriculo();
+interface LanguageClientProps {
+  userId: string;
+}
+
+const LanguageClient = async ({ userId }: LanguageClientProps) => {
+  const dataLanguages = await fetchLanguage(userId);
 
   return (
     <div className="w-full p-2">
-      {data.languages.map((language: LanguageType) => (
+      +
+      {dataLanguages?.map((language: LanguageType) => (
         <LanguagesData
           key={language.id}
           name={language.name}
