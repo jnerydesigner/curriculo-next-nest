@@ -48,7 +48,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.3.8</version> <!-- Versão atualizada do driver -->
+			<version>42.3.9</version> <!-- Versão atualizada do driver -->
 		</dependency>
 	</dependencies>
 
